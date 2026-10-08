@@ -23,7 +23,7 @@ You can also double-click `index.html` to open it with a `file://` URL. Live Ser
 
 ## Free hosting with GitHub Pages
 
-The repository includes a GitHub Actions workflow at `.github/workflows/pages.yml`. It publishes the static site to GitHub Pages whenever you push to `main` or `master`, or run the workflow manually.
+The repository includes a GitHub Actions workflow at `.github/workflows/pages.yml`. It requests GitHub Pages enablement on its first run and publishes the static site whenever you push to `main` or `master`, or run the workflow manually. If GitHub blocks automatic enablement, enable Pages manually using **Settings → Pages → Build and deployment → Source: GitHub Actions**, then rerun the workflow from the **Actions** tab.
 
 1. Sign in to GitHub as `ag-associates` and create a **public** repository named exactly `ag-associates.github.io`. A public repository is required for GitHub Pages on the free plan. This special repository name serves the site at the root URL.
 2. In the new repository, leave **Add a README**, `.gitignore`, and license unchecked so it starts empty.
@@ -37,8 +37,7 @@ The repository includes a GitHub Actions workflow at `.github/workflows/pages.ym
    git push -u origin main
    ```
 
-4. In GitHub, open the repository’s **Settings → Pages** and set **Build and deployment → Source** to **GitHub Actions**.
-5. Open the repository’s **Actions** tab and wait for **Deploy static site to GitHub Pages** to finish successfully. Your site address will be `https://ag-associates.github.io/`.
+4. Open the repository’s **Actions** tab and wait for **Deploy static site to GitHub Pages** to finish successfully. The workflow requests Pages setup automatically. If that request is blocked, open **Settings → Pages** and set **Build and deployment → Source** to **GitHub Actions**, then rerun the failed workflow. Your site address will be `https://shreyash3921.github.io/a.g.associates/`.
 6. Later site updates go live after you commit and push them to `main`.
 
 The project does not currently have a Git repository or GitHub remote, so it cannot be published to a public URL until you create the repository and push the files. The requested username and repository name were not found in a public GitHub account/repository search; confirm that `ag-associates` is your actual GitHub username and that it is available before creating the repository. This GitHub Pages setup hosts static frontend files only; it does not run Node.js, Express or MySQL.
