@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Illustrative architectural floor plan">
+<rect width="800" height="520" fill="#f4f2ec"/><g fill="#fff" stroke="#282b28" stroke-width="8">
+<path d="M105 90h590v340H105z"/><path d="M335 90v160h-230M335 250v180M335 250h190v180M525 90v160h170M525 250v180"/>
+</g><g stroke="#b59661" stroke-width="5" fill="none"><path d="M175 245v-72m88 72v-72M389 165h88m-88 40h88M576 305v75m-85-38h85M165 335h120m-60-62v125"/></g><g fill="#777872" font-family="Arial,sans-serif" font-size="17" letter-spacing="2"><text x="165" y="145">BEDROOM</text><text x="390" y="145">LIVING</text><text x="575" y="145">KITCHEN</text><text x="150" y="390">BEDROOM</text><text x="365" y="390">DINING</text><text x="560" y="390">BATH</text></g><text x="105" y="474" fill="#927546" font-family="Arial,sans-serif" font-size="12" letter-spacing="3">ILLUSTRATIVE PLAN · NOT FOR CONSTRUCTION</text>
+</svg>
