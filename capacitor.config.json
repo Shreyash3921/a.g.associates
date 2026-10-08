@@ -1,0 +1,8 @@
+{
+  "appId": "com.agassociates.architecture",
+  "appName": "A.G. Associates",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}

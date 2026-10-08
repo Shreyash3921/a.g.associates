@@ -21,26 +21,43 @@ The floor-plan examples are illustrative only and are not construction drawings.
 
 You can also double-click `index.html` to open it with a `file://` URL. Live Server is recommended because it gives the site a consistent local origin for browser storage and avoids limitations some browsers apply to local files.
 
+## Android app (APK)
+
+The `android/` project packages the website locally inside an Android app with the app name **A.G. Associates**. Website pages load from the APK; remote photos, Google Maps, Google Fonts and Bootstrap still require an internet connection.
+
+### Download a ready-built APK
+
+Every push to `main`/`master`, or a manual run of **Build Android APK**, builds a debug APK and uploads it as a 30-day GitHub Actions artifact.
+
+1. Open the repository’s [Actions page](https://github.com/Shreyash3921/a.g.associates/actions/workflows/build-android.yml).
+2. Select the successful **Build Android APK** run for the latest commit.
+3. Under **Artifacts**, download `ag-associates-android-debug`.
+4. Extract the ZIP on your Android device or computer. Transfer `app-debug.apk` to the phone and open it. If Android asks, permit installs from that file manager/browser for this one installation.
+
+This is a **debug APK for testing and direct installation**, not a Play Store release. Android may show an unknown-source installation warning. A Play Store-ready app needs a release build signed with a private signing key; keep that key and its passwords private and outside Git.
+
+### Build locally
+
+Install Node.js 22 or later, Java 17, and Android Studio with Android SDK Platform 35. From the project root:
+
+```powershell
+npm ci
+npm run cap:sync
+cd android
+.\gradlew.bat assembleDebug
+```
+
+The APK will be at `android/app/build/outputs/apk/debug/app-debug.apk`. `www/` and the Android web assets are generated from the source HTML/CSS/JS by `npm run cap:sync`; edit the original website files and sync again rather than editing generated copies.
+
 ## Free hosting with GitHub Pages
 
 The repository includes a GitHub Actions workflow at `.github/workflows/pages.yml`. It publishes the static site whenever you push to `main` or `master`, or run the workflow manually. If Pages is not enabled, enable it using **Settings → Pages → Build and deployment → Source: GitHub Actions**, then rerun the workflow from the **Actions** tab.
 
-1. Sign in to GitHub as `ag-associates` and create a **public** repository named exactly `ag-associates.github.io`. A public repository is required for GitHub Pages on the free plan. This special repository name serves the site at the root URL.
-2. In the new repository, leave **Add a README**, `.gitignore`, and license unchecked so it starts empty.
-3. Open the website folder in VS Code, then open **Terminal → New Terminal**. Run these commands from the project root:
+1. The site repository is `Shreyash3921/a.g.associates`. The connected GitHub Pages address is `https://shreyash3921.github.io/a.g.associates/`.
+2. In the repository, open **Settings → Pages** and set **Build and deployment → Source** to **GitHub Actions** if it is not already set.
+3. On subsequent updates, commit and push changes to `main`. The Pages workflow publishes the site automatically.
 
-   ```powershell
-   git init -b main
-   git add .
-   git commit -m "Add A.G. Associates website"
-   git remote add origin https://github.com/ag-associates/ag-associates.github.io.git
-   git push -u origin main
-   ```
-
-4. Open the repository’s **Actions** tab and wait for **Deploy static site to GitHub Pages** to finish successfully. The workflow requests Pages setup automatically. If that request is blocked, open **Settings → Pages** and set **Build and deployment → Source** to **GitHub Actions**, then rerun the failed workflow. Your site address will be `https://shreyash3921.github.io/a.g.associates/`.
-6. Later site updates go live after you commit and push them to `main`.
-
-GitHub Pages for the connected repository deploys to `https://shreyash3921.github.io/a.g.associates/` unless a custom domain is configured in the repository’s Pages settings. GitHub Pages hosts static frontend files only; it does not run Node.js, Express or MySQL.
+GitHub Pages hosts static frontend files only; it does not run Node.js, Express or MySQL.
 
 ## Deploying to multiple free static hosts
 
