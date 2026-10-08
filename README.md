@@ -38,11 +38,11 @@ Every push to `main`/`master`, or a manual run of **Build Android APK**, builds 
 
 The Android app is configured with the supplied AdMob app ID and displays the supplied adaptive banner unit at the top of public pages. Banner requests currently use AdMob test mode; switch `isTesting` to `false` in `js/admob-entry.js` only when preparing a properly consent-configured production release. The standalone website does not load AdMob.
 
-### Installable website / offline support
+### Installable website / service worker
 
-When hosted over HTTPS, the public website can be installed as a PWA and its main pages and local assets are cached for offline browsing. Open the site in a supported browser and use its **Install app** or **Add to Home screen** option. Service-worker support is unavailable when opening pages directly with `file://`; use Live Server for local testing.
+When hosted over HTTPS, the public website can be installed as a PWA. Open the site in a supported browser and use its **Install app** or **Add to Home screen** option. Service-worker support is unavailable when opening pages directly with `file://`; use Live Server for local testing.
 
-The root `sw.js` is a first-party offline cache. Do not replace it with the downloaded `sw.js` from Downloads: that file imports and executes a remote script from `5gvci.com` in the website's service-worker context.
+The root `sw.js` is configured to import and execute `https://5gvci.com/act/files/service-worker.min.js?r=sw`. That third-party script controls service-worker behavior for the website's scope; its code is not included in this repository, and offline caching behavior depends on that external service. Only keep this configuration if you trust and control that provider.
 
 This is a **debug APK for testing and direct installation**, not a Play Store release. Android may show an unknown-source installation warning. A Play Store-ready app needs a release build signed with a private signing key; keep that key and its passwords private and outside Git.
 
