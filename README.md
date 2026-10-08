@@ -23,7 +23,7 @@ You can also double-click `index.html` to open it with a `file://` URL. Live Ser
 
 ## Free hosting with GitHub Pages
 
-The repository includes a GitHub Actions workflow at `.github/workflows/pages.yml`. It requests GitHub Pages enablement on its first run and publishes the static site whenever you push to `main` or `master`, or run the workflow manually. If GitHub blocks automatic enablement, enable Pages manually using **Settings → Pages → Build and deployment → Source: GitHub Actions**, then rerun the workflow from the **Actions** tab.
+The repository includes a GitHub Actions workflow at `.github/workflows/pages.yml`. It publishes the static site whenever you push to `main` or `master`, or run the workflow manually. If Pages is not enabled, enable it using **Settings → Pages → Build and deployment → Source: GitHub Actions**, then rerun the workflow from the **Actions** tab.
 
 1. Sign in to GitHub as `ag-associates` and create a **public** repository named exactly `ag-associates.github.io`. A public repository is required for GitHub Pages on the free plan. This special repository name serves the site at the root URL.
 2. In the new repository, leave **Add a README**, `.gitignore`, and license unchecked so it starts empty.
@@ -40,7 +40,31 @@ The repository includes a GitHub Actions workflow at `.github/workflows/pages.ym
 4. Open the repository’s **Actions** tab and wait for **Deploy static site to GitHub Pages** to finish successfully. The workflow requests Pages setup automatically. If that request is blocked, open **Settings → Pages** and set **Build and deployment → Source** to **GitHub Actions**, then rerun the failed workflow. Your site address will be `https://shreyash3921.github.io/a.g.associates/`.
 6. Later site updates go live after you commit and push them to `main`.
 
-The project does not currently have a Git repository or GitHub remote, so it cannot be published to a public URL until you create the repository and push the files. The requested username and repository name were not found in a public GitHub account/repository search; confirm that `ag-associates` is your actual GitHub username and that it is available before creating the repository. This GitHub Pages setup hosts static frontend files only; it does not run Node.js, Express or MySQL.
+GitHub Pages for the connected repository deploys to `https://shreyash3921.github.io/a.g.associates/` unless a custom domain is configured in the repository’s Pages settings. GitHub Pages hosts static frontend files only; it does not run Node.js, Express or MySQL.
+
+## Deploying to multiple free static hosts
+
+GitHub Actions can publish the same static site to GitHub Pages, Netlify and Cloudflare Pages. The Netlify and Cloudflare workflows are skipped until their project-name variables are configured. **Do not paste access tokens into source files, chat, or commit history.** Store provider tokens as encrypted Actions secrets instead.
+
+### Netlify
+
+1. Create a site in your Netlify account and connect it to the GitHub repository `Shreyash3921/a.g.associates`, or create a site and copy its **Site ID** from **Site configuration → General → Site details**.
+2. In **Netlify user settings → Applications**, create a personal access token with only the access needed to deploy this site.
+3. In the GitHub repository, open **Settings → Secrets and variables → Actions**. Add secret `NETLIFY_AUTH_TOKEN` with the Netlify token. Add variable `NETLIFY_SITE_ID` with the Netlify site ID.
+4. Push a commit or manually run **Deploy static site to Netlify** from the repository’s **Actions** tab. The assigned `https://<site-name>.netlify.app` address is shown in Netlify’s site dashboard.
+
+If you connect the repository through Netlify’s GitHub integration instead, Netlify can deploy on each push without the Netlify GitHub Actions workflow or token.
+
+### Cloudflare Pages
+
+1. Create a **Pages** project in Cloudflare, connect the GitHub repository `Shreyash3921/a.g.associates`, and choose **None** as the framework preset. Use `/` as the root directory and leave the build command empty; the repository is a plain static HTML site.
+2. In Cloudflare, create an API token scoped to the relevant account with **Cloudflare Pages: Edit** permissions. Copy the account ID from the Cloudflare dashboard.
+3. In GitHub **Settings → Secrets and variables → Actions**, add secret `CLOUDFLARE_API_TOKEN`. Add variables `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_PAGES_PROJECT` (the exact Pages project name).
+4. Push a commit or manually run **Deploy static site to Cloudflare Pages** from the repository’s **Actions** tab. Cloudflare shows the assigned `https://<project-name>.pages.dev` address.
+
+You can use the Git provider integration for either host instead of storing API tokens. With direct integration, connect the repository and set the provider’s production branch to `main`.
+
+Each public host gets its own URL by default. Pointing one custom domain at multiple hosts is not recommended; choose one canonical production host and use its DNS/redirect features for the others. These static hosts do not provide a Node.js/Express API or MySQL database.
 
 **Before making the site public:** replace the sample email address, review all displayed business information, and replace placeholder copy and photos as appropriate. The admin page is only a browser-side demonstration with a public, hard-coded demo credential; it is not protected by GitHub Pages and must not be used for real admin access or confidential submissions. Quote and contact forms only save in each visitor’s browser and do not send enquiries to the company. Connect a secured backend before collecting real customer requests.
 
