@@ -4,15 +4,17 @@
   "private": true,
   "description": "Android wrapper for the A.G. Associates architecture website",
   "scripts": {
-    "prepare:web": "node scripts/prepare-web.js",
+    "prepare:web": "node scripts/prepare-web.js && esbuild js/admob-entry.js --bundle --format=iife --outfile=www/js/admob.js",
     "cap:sync": "npm run prepare:web && cap sync android",
     "cap:open": "cap open android"
   },
   "dependencies": {
+    "@capacitor-community/admob": "^7.2.0",
     "@capacitor/android": "7.6.9",
     "@capacitor/core": "7.6.9"
   },
   "devDependencies": {
-    "@capacitor/cli": "7.6.9"
+    "@capacitor/cli": "7.6.9",
+    "esbuild": "^0.28.2"
   }
 }

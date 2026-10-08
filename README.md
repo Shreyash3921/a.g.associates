@@ -34,6 +34,10 @@ Every push to `main`/`master`, or a manual run of **Build Android APK**, builds 
 3. Under **Artifacts**, download `ag-associates-android-debug`.
 4. Extract the ZIP on your Android device or computer. Transfer `app-debug.apk` to the phone and open it. If Android asks, permit installs from that file manager/browser for this one installation.
 
+### AdMob banner
+
+The Android app is configured with the supplied AdMob app ID and displays the supplied adaptive banner unit at the top of public pages. Banner requests currently use AdMob test mode; switch `isTesting` to `false` in `js/admob-entry.js` only when preparing a properly consent-configured production release. The standalone website does not load AdMob.
+
 This is a **debug APK for testing and direct installation**, not a Play Store release. Android may show an unknown-source installation warning. A Play Store-ready app needs a release build signed with a private signing key; keep that key and its passwords private and outside Git.
 
 ### Build locally

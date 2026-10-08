@@ -12,6 +12,13 @@ const agNavigation = [
 
 const pageName = location.pathname.split("/").pop() || "index.html";
 
+if (window.Capacitor?.isNativePlatform?.()) {
+  const adLoader = document.createElement("script");
+  adLoader.src = "js/admob.js";
+  adLoader.defer = true;
+  document.head.appendChild(adLoader);
+}
+
 document.querySelectorAll('input[type="tel"]').forEach(input => {
   input.removeAttribute("pattern");
   input.addEventListener("input", () => {
