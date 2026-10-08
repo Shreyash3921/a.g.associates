@@ -12,6 +12,18 @@ const agNavigation = [
 
 const pageName = location.pathname.split("/").pop() || "index.html";
 
+if (!window.Capacitor?.isNativePlatform?.()) {
+  const manifestLink = document.createElement("link");
+  manifestLink.rel = "manifest";
+  manifestLink.href = "manifest.webmanifest";
+  document.head.appendChild(manifestLink);
+
+  if ("serviceWorker" in navigator && window.isSecureContext) {
+    navigator.serviceWorker.register("sw.js")
+      .catch(error => console.error("Unable to register the A.G. Associates offline service worker", error));
+  }
+}
+
 if (window.Capacitor?.isNativePlatform?.()) {
   const adLoader = document.createElement("script");
   adLoader.src = "js/admob.js";

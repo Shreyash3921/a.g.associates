@@ -1,0 +1,19 @@
+{
+  "id": "./",
+  "name": "A.G. Associates",
+  "short_name": "A.G. Associates",
+  "description": "Architectural Design & Civil Construction",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#292b28",
+  "icons": [
+    {
+      "src": "./images/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
